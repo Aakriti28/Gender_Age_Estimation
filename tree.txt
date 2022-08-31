@@ -1,0 +1,22 @@
+.
+├── 0.2.0.3
+├── Age_Gender_Estimation
+├── GFPGAN
+├── Results
+├── Retina_Face
+├── Yolov5_DeepSort
+├── __pycache__
+├── age_gender.py
+├── face_detection.py
+├── face_sr.py
+├── gfpgan.egg-info
+├── inference
+├── main.py
+├── make_csv.py
+├── person_extraction.py
+├── requirements.txt
+├── tree.txt
+├── utkface-new
+└── yolov5m.pt
+
+9 directories, 10 files
