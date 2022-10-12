@@ -1,6 +1,6 @@
 # Bosch's Age and Gender Estimation Challenge
 
-![Problem Cover](https://github.com/Aakriti28/Gender_Age_Estimation/blob/main/problem_cover.png)
+<img src="https://github.com/Aakriti28/Gender_Age_Estimation/blob/main/problem_cover.png" width=800/>
 
 Here is the [presentation](https://docs.google.com/presentation/d/1fVJiSLhUwnwvWKuk2bXcnlIWA-2wE9qBHJLYCCazvcs/edit?usp=sharing) made by IIT Bombay's Team at the 10th Inter IIT Tech Meet.
 
@@ -19,6 +19,8 @@ Hence, human motion analysis in automated video surveillance has become one of
 the most
 active and attractive research topics in the area of computer vision and pattern
 recognition.
+
+<img src = "https://github.com/Aakriti28/Gender_Age_Estimation/blob/main/our_approach.png" width="450"/>
 
 ## Problem Statement
 Build a solution to estimate the gender and age of people from a surveillance video
@@ -70,6 +72,36 @@ Format of the output csv:
 ```diff
 ! frame num,person id, bb_xmin, bb_ymin, bb_height, bb_width, age_min, age_max, age_actual, gender 
 ```
+
+## Detailed Approach
+* We are using DeepSort algorithm for person tracking and Re-identification built
+on the backbone of the `YOLO_v5`. The images of people tracked along with
+bounding boxes and ids of unique people for each frame are saved.
+* From the images of person, face is extracted using RetinaFace model, which
+subsequently goes through super-resolution to be fed into the age and Gender
+prediction model. RetinaFace is cutting edge technology for for face detection which uses facial
+landmarks for face detection.
+* For super resolution we have used GFPGan which is built upon ESRGan and
+and is used for real world face restoration. Face restoration helps recover details of facial features lost due to interpolation
+and while cropping the face out of the low quality security feed.
+* The enhanced image is then passed through FaceNet which is has the
+architecture of an Inception ResNet V1 model trained with softmax loss on
+VGGFace2 dataset consisting on ~3.3M images.
+* FaceNet extracted features from the image of face and makes embeddings
+which which will be used for prediction. We have trained two separate Neural
+Networks, one of which performs regression for age estimation and other one
+performs binary classification for gender prediction.
+* At each point the ids of unique persons are maintained and at the end average
+of all predictions is taken. Output is a csv with bounding boxes, person ids for
+each frame along with age and gender estimates. These are also used to
+annotate the video for visual output on the input video.
+
+## Sample Results
+
+Results on a diverse set of videos are adde on [drive](https://drive.google.com/drive/folders/1sT-X4NJQyJZMsg2ytsyZZz3s7zCWabOC?usp=sharing)
+
+<img src="https://github.com/Aakriti28/Gender_Age_Estimation/blob/main/sample_result.png" width=1000/>
+
 
 ## Team Members - 
 * Aakriti
